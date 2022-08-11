@@ -1,0 +1,21 @@
+.site-layout-content {
+  min-height: 600px;
+  max-height: max-content;
+  padding: 24px;
+  background: #fff;
+}
+.logo {
+  float: left;
+  width: 120px;
+  height: 20px;
+  margin: 16px 24px 24px 24px;
+  margin-bottom: 20px;
+
+}
+.ant-row-rtl .logo {
+  float: right;
+  margin: 16px 0 16px 24px;
+}
+  [data-theme="dark"] .site-layout-content {
+    background: #141414;
+  }
