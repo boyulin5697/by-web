@@ -3,13 +3,14 @@ import 'antd/dist/antd.css';
 import './App.css';
 import ByFooter from './component/Footer';
 import ByHeader from './component/Header';
-import { BackTop,Breadcrumb, Layout } from 'antd';
+import { BackTop,Breadcrumb, Layout, Spin } from 'antd';
 import ByRouter from './router';
 
 const { Content } = Layout;
 
 function App() {
   const [ componentName, setComponentName ] = useState("Home")
+ 
 
   function getComponentChange(name:string){
     setComponentName(name);
@@ -32,7 +33,9 @@ function App() {
       >
         <Breadcrumb.Item>{ componentName }</Breadcrumb.Item>
       </Breadcrumb>
-      <div className="site-layout-content"><ByRouter getComponentChange = {getComponentChange}/></div>
+        <div className="site-layout-content">
+          <ByRouter getComponentChange = {getComponentChange}/>
+        </div>
     </Content>
     <ByFooter/>
   </Layout>

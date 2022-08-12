@@ -32,10 +32,10 @@ export default function ByHeader() {
             <Link to="/">首页</Link>
           </Menu.Item>
           <Menu.Item key="Blog">
-            博客
+            <Link to= "/blogCalender">博客</Link>
           </Menu.Item>
-          <Menu.Item key="Search">
-            <Link to= "/searchResult">搜索</Link>
+          <Menu.Item key="Album">
+            相册
           </Menu.Item>
           <Menu.Item>
           <div className="searchBox" style={{marginLeft:'30px'}}>

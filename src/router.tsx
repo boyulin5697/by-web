@@ -4,6 +4,7 @@ import 'antd/dist/antd.css';
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import SearchPage from './views/SearchPage';
+import BlogCalenderPage from './views/BlogCalenderPage';
 
 /**
  * 路由组件
@@ -16,7 +17,7 @@ import SearchPage from './views/SearchPage';
 export default function ByRouter(props:any) {
 
   const { getComponentChange } = props;
-
+ 
   function announceComponentChange(name:string){
     getComponentChange(name)
   }
@@ -25,10 +26,11 @@ export default function ByRouter(props:any) {
     <div className='byRouter'>
         <Routes>
           <Route path = "/" element = { <Home announceComponentChange = { announceComponentChange }/> } >
-          </Route>
-          <Route path = "/searchResult" element ={ <SearchPage announceComponentChange = { announceComponentChange }/>}/>
-          <Route path = "*" element = { <NotFound announceComponentChange = { announceComponentChange }/> }>
-          </Route>
+        </Route>
+        <Route path ="/blogCalender" element={ <BlogCalenderPage announceComponentChange={ announceComponentChange }/> }/>
+        <Route path = "/searchResult" element ={ <SearchPage announceComponentChange = { announceComponentChange }/>}/>
+        <Route path = "*" element = { <NotFound announceComponentChange = { announceComponentChange }/> }>
+        </Route>
         </Routes>
     </div>
   )
