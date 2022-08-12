@@ -41,7 +41,7 @@ export default function Home(props:any) {
       <br/>
       <div className='TimeTable' style={{height:'350px'}}>
         <div className='timeLine' style={{ float:'left' }} >
-        <Card title="时间线" style={{ width: 300, minHeight:'min-content', boxShadow:'0px -5px 5px -3px #000'}}>
+        <Card title="时间线" style={{ width: '180%', minHeight:'min-content', boxShadow:'0px -5px 5px -3px #000'}}>
           <Timeline>
             <Timeline.Item>获得域名 2022-02-01(概？)</Timeline.Item>
             <Timeline.Item>开始建站 2022-08-06</Timeline.Item>
@@ -54,7 +54,7 @@ export default function Home(props:any) {
         </Card>
         </div>
         <div className='intro' style={{ float:'right'}}>
-          <Card title="要看我的自我介绍吗...不看就把它收起来吧" style={{width:500}}>
+          <Card title="要看我的自我介绍吗...不看就把它收起来吧" style={{marginLeft:'30%',width:'70%'}}>
               <p>{text}</p>
           </Card>
         </div>

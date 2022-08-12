@@ -10,7 +10,8 @@ import 'antd/dist/antd.css'
  * @since 2022/8/11
  * 
  * 
- * @notice byTable 组件对传入的参数有显示定义：见'TableProperties'
+ * @notice byTable 组件对传入的参数有显式定义：见'TableProperties'
+ * 传入的tableProperties变量名为tableContent
  * 同时，modifyPage()方法必须在每一个父组件内进行定义。
  * 
  */
@@ -29,14 +30,18 @@ export interface TableProperties<T>{
 }
 
 export default function ByTable(props:any) {
-    const data = props.props.data
-    const columns = props.props.columns
-    const pagination = props.props.pagination
-    const { modifyPage } = props
+    const { tableContent,modifyPage } = props
+    const data = tableContent.data;
+    const columns = tableContent.columns;
+    const pagination = tableContent.pagination;
     console.log("表格数据：",data)
     console.log("行数据：",columns)
     console.log("分页配置：",pagination)
 
+    /**
+     * 当分页属性发生变化时，勾回调用者
+     * @param newPagination 
+     */
     const handleTableChange = (newPagination: TablePaginationConfig) => {
         modifyPage(newPagination.current,newPagination.pageSize)
     }

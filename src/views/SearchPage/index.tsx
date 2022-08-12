@@ -112,7 +112,7 @@ export default function SearchPage(props:any) {
     announceComponentChange("Search Results");
     return (
         <div className='searchResult'>
-            <ByTable props={tableContent} modifyPage = {modifyPage}/>
+            <ByTable tableContent={tableContent} modifyPage = {modifyPage}/>
         </div>
     )
 }
