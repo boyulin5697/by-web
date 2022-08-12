@@ -32,11 +32,10 @@ const listContents:listProperties = {
 export default function BlogCalenderPage(props:any) {
   const { announceComponentChange } = props;
   announceComponentChange("Blog Calender");
-  const [ now, setNow ] = useState<string>(moment().format('YYYY-MM-DD'))
+  const [ now ] = useState<string>(moment().format('YYYY-MM-DD'))
   const [ time, setTime ] = useState<string>();
-  function setCurrentDestTime(newTime:string){
-    //TODO:修复今日时间bug
-    if(newTime!==now){
+  function setCurrentDestTime(newTime:string,kickToday:boolean){
+    if(newTime!==now||kickToday===true){
       setTime(newTime);
     }
     console.log("set state time:"+time)

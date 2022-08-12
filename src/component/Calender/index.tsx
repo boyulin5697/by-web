@@ -15,19 +15,19 @@ import moment from 'moment';
 export default function ByCalender(props:any) {
     const { time,setCurrentDestTime } = props;
 
-    function giveTime(value:Moment){
-      setCurrentDestTime(value.format('YYYY-MM-DD'))
+    function giveTime(value:Moment,clickToday:boolean){
+      setCurrentDestTime(value.format('YYYY-MM-DD'),clickToday)
     }
   
     const value = moment()
     console.log(value)
-    giveTime(value)
+    giveTime(value,false)
     const onPanelChange = (value: Moment, mode: CalendarMode) => {
         console.log(value.format('YYYY-MM-DD'), mode);
       };
       //TODO:执行搜索，获取列表，并回调给上层
     const onSelect = (value:Moment) => {
-        giveTime(value)
+        giveTime(value,true)
     };
   return (
     <Calendar onPanelChange={onPanelChange}
