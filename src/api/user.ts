@@ -1,4 +1,4 @@
-import { postAction, } from "./service";
+import { ByPost } from "./service";
 
 /**
  * 用户服务端请求
@@ -12,22 +12,24 @@ import { postAction, } from "./service";
 /**
  * 登录请求体
  */
-export interface LoginCredit{
-    name:string,
+export interface LoginRequest{
+    loginCredit:string,
     password:string
 }
 
-export interface RegisterCredit{
-    name:string,
-    email:string,
-    password:string,
+export interface RegisterRequest{
+     nickName:string,
+     password:string,
+     email:string,
+     gender:string,
+     intro:string
 }
 
-export function login(request:LoginCredit){
-    return postAction("/api/login",request);
+export function login(request:LoginRequest){
+    return ByPost(request,"/user/login");
 }
 
-export function register(request:RegisterCredit){
-    return postAction("/api/register",request)
+export function register(request:RegisterRequest){
+    return ByPost(request,"/user/register")
 }
 

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState,useCallback } from 'react'
 import { useNavigate } from 'react-router';
-import {  Button, Form, Input, Select } from 'antd'
-
+import {  Button, Form, Input, message, Select } from 'antd'
+import { login,register } from '../../api/user';
+import { rejects } from 'assert';
+import { error } from 'console';
 
 /**
  * 注册页面
@@ -13,8 +15,10 @@ import {  Button, Form, Input, Select } from 'antd'
 
 const { Option } = Select;
 
+
 export default function RegisterPage(props:any) {
   const { announceComponentChange } = props;
+  const [ registered,setRegistered ] = useState<boolean>(false);
   announceComponentChange("Register");
   const onNavigate = useNavigate();
   const [form] = Form.useForm();
@@ -44,10 +48,18 @@ export default function RegisterPage(props:any) {
     },
   };
 
-  const onFinish = (values:any) => {
-    //TODO: Connect with backend apis
-    onNavigate('/');
-  }
+  const onFinish = useCallback((values:any) => {
+    if(registered)return;
+    setRegistered(true)
+    let result = register(values)
+    if(result.code===200){
+      message.success('注册成功！')
+      onNavigate("/")
+    }else{
+      setRegistered(false)
+      message.error('注册失败！')
+    }
+  },[registered,onNavigate])
 
   return (
     <Form
@@ -55,10 +67,6 @@ export default function RegisterPage(props:any) {
       form={form}
       name="register"
       onFinish={onFinish}
-      initialValues={{
-        residence: ['zhejiang', 'hangzhou', 'xihu'],
-        prefix: '86',
-      }}
       scrollToFirstError
     >
       <Form.Item

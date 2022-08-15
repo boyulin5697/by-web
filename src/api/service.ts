@@ -1,56 +1,41 @@
-import axios from "axios";
+import request from 'umi-request'
 
-/**
- * axios封装
- * 
- * @author by.
- * @since 2022/8/10
- *  
- */
-
-const AxiosService = axios.create({
-    timeout:30000
-});
-
-AxiosService.interceptors.request.use(
-    (config) => {
-        //TODO Some more action
-    },
-    (err) => {
-        return Promise.reject(err);
-    }
-)
-
-AxiosService.interceptors.response.use(
-    (res) => {
-        return res;
-    },
-    (err) => {
-        return Promise.reject(err);
-    }
-)
-
-/**
- * post 请求封装
- * @param url 
- * @param data 
- * @returns 
- */
-export function postAction(url:string, data:any){
-    return AxiosService({
-        url:url,
-        method:'post',
-        data:data
-    })
-} 
-
-export function getAction(url:string, params:any){
-    return AxiosService({
-        url:url,
-        method:'get',
-        params:params
-    })
+export interface CommonResponse{
+    code:number,
+    message:string,
+    data:any,
+    time:string
 }
 
-export default AxiosService;
- 
+/**
+ * Rewrite post method
+ * @param data 
+ * @param url 
+ */
+export function ByPost<T = any>(data:T,url:string):any{
+    request.post('/api'+url,
+    {
+        data:data
+
+    }).then((resp) => {
+        console.log(resp)
+        const resData:CommonResponse = {
+            code:resp.data.code,
+            message:resp.data.message,
+            data:resp.data.data,
+            time:resp.data.time
+        }
+        return resData
+    })
+    .catch((error) => {
+        console.log(error)
+        const errorData:CommonResponse = {
+            code:500, 
+            message:'出现错误',
+            data:error, 
+            time:error.time
+        }
+        return errorData
+    })
+
+}
