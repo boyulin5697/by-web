@@ -1,5 +1,7 @@
 package com.by.web.backend.entites;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,11 +13,13 @@ import java.util.Date;
  * @date 2022/8/15
  */
 @Data
+@TableName(value = "blog")
 public class Blog {
 
     /**
      * 博客编号
      */
+    @TableId
     private String blogId;
 
     /**
@@ -37,4 +41,20 @@ public class Blog {
      * 创建日期
      */
     private Date createdDate;
+
+    /**
+     * 点赞数
+     */
+    private int likes;
+
+    /**
+     * 评论数
+     */
+    private int comments;
+
+    /**
+     * 最低可阅读等级
+     *
+     */
+    private int accessMinLevel;
 }

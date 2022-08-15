@@ -40,9 +40,9 @@ public class InterceptorConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authenticationInterceptor()).addPathPatterns("/wds/**")
+        registry.addInterceptor(authenticationInterceptor()).addPathPatterns("/user/needAuth")
                 ;
-        //这里的逻辑是，要求请求所有接口时需要通过过滤器，由是否含有需求注解决定是否继续/抛出异常。
+
     }
     @Bean
     public StandardInterceptor authenticationInterceptor() {

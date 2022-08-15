@@ -29,7 +29,6 @@ import java.util.regex.Pattern;
  *
  * @author by.
  * @date 2022/5/12
- * @since 1.0.3
  */
 @Slf4j
 public abstract class StandardMongoOperations<T> {
@@ -70,7 +69,7 @@ public abstract class StandardMongoOperations<T> {
 
     /**
      * save, includes update old one and create new one.
-     * 
+     *
      * @param entity
      */
     public void save(T entity) {
@@ -79,7 +78,7 @@ public abstract class StandardMongoOperations<T> {
 
     /**
      * remove entity -> delete
-     * 
+     *
      * @param entity
      */
     public void remove(T entity) {
@@ -95,7 +94,7 @@ public abstract class StandardMongoOperations<T> {
 
     /**
      * The default id type is String.
-     * 
+     *
      * @param id
      * @return
      */
@@ -115,7 +114,7 @@ public abstract class StandardMongoOperations<T> {
 
     /**
      * Find one By query
-     * 
+     *
      * @param query
      * @return
      */
@@ -125,7 +124,7 @@ public abstract class StandardMongoOperations<T> {
 
     /**
      * count query result
-     * 
+     *
      * @param query query
      * @return count value
      */
@@ -141,7 +140,7 @@ public abstract class StandardMongoOperations<T> {
      * <p>
      * Only support data which not defined as fake deletion.
      * </p>
-     * 
+     *
      * @param isRough      Whether this search is rough or exact
      * @param searchString the searched string
      * @param searchItem   the searched item
