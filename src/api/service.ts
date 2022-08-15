@@ -1,41 +1,55 @@
+
 import request from 'umi-request'
 
-export interface CommonResponse{
+/**
+ * umi request封装
+ * 
+ * @author by.
+ * @since 2022/8/15
+ */
+
+
+export interface CommonResponse<T = any>{
     code:number,
     message:string,
-    data:any,
+    data?:T,
     time:string
 }
 
+export interface ApiResults<T = any>{
+    resp: CommonResponse<T>;
+}
+
+export class ResponseError extends Error{
+    public url?:string;
+    public response?:any;
+    public body?: any;
+
+}
 /**
  * Rewrite post method
  * @param data 
  * @param url 
  */
-export function ByPost<T = any>(data:T,url:string):any{
-    request.post('/api'+url,
-    {
-        data:data
-
-    }).then((resp) => {
-        console.log(resp)
-        const resData:CommonResponse = {
-            code:resp.data.code,
-            message:resp.data.message,
-            data:resp.data.data,
-            time:resp.data.time
-        }
-        return resData
+const api = '/api'
+export const ByPost = (data:any,url:string) => {
+    const promise: Promise<ApiResults> = new Promise((resolve) => {
+        request.post(
+            api+url,
+            {
+                data:data,
+                errorHandler: (error) => {
+                    console.error(error)
+                    return error
+                },
+            }
+        ).then((resp: CommonResponse) => {
+            resolve({
+                resp,
+            })
+        }).catch((error:Error) => {
+            resolve({resp:{code:500,message:error.message,time:''}});
+        });
     })
-    .catch((error) => {
-        console.log(error)
-        const errorData:CommonResponse = {
-            code:500, 
-            message:'出现错误',
-            data:error, 
-            time:error.time
-        }
-        return errorData
-    })
-
+    return promise;
 }

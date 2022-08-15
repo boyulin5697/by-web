@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 @Data
 public class RegisterRequest implements ApiReq{
 
-    private String nickName;
+    private String nickname;
 
     private String password;
 
@@ -24,7 +24,7 @@ public class RegisterRequest implements ApiReq{
 
     @Override
     public void verify() {
-        Assert.hasText(nickName,"昵称不能为空");
+        Assert.hasText(nickname,"昵称不能为空");
         Assert.hasText(password,"密码不能为空");
         Assert.hasText(email,"邮箱不能为空");
         Assert.hasText(gender,"性别不能为空");

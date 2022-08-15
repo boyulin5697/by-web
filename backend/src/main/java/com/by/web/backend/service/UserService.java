@@ -27,6 +27,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     private UserMapper userMapper;
 
     public CommonResponse register(RegisterRequest request){
+        request.verify();
         User user = new User();
         ModelMapperUtils.map(request,user);
         userMapper.insert(user);
@@ -34,6 +35,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     }
 
     public CommonResponse login(LoginRequest request){
+        request.verify();
         String credit = request.getLoginCredit();
         User user;
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();

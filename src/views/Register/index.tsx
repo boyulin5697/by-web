@@ -4,6 +4,7 @@ import {  Button, Form, Input, message, Select } from 'antd'
 import { login,register } from '../../api/user';
 import { rejects } from 'assert';
 import { error } from 'console';
+import { ApiResults, CommonResponse } from '../../api/service';
 
 /**
  * 注册页面
@@ -48,11 +49,11 @@ export default function RegisterPage(props:any) {
     },
   };
 
-  const onFinish = useCallback((values:any) => {
+  const onFinish = useCallback(async (values:any) => {
     if(registered)return;
-    setRegistered(true)
-    let result = register(values)
-    if(result.code===200){
+    setRegistered(true)  
+    const response = (await register(values)).resp
+    if(response.code===200){
       message.success('注册成功！')
       onNavigate("/")
     }else{
