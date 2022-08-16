@@ -81,6 +81,7 @@ export default function RegisterPage(props:any) {
         showIcon></Alert>):<Alert message={wrong} closable type='error'
         showIcon /> 
     }
+    <br></br>
     <Form
       {...formItemLayout}
       form={form}
