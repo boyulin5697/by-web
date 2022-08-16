@@ -27,10 +27,20 @@ export interface RegisterRequest{
 
 const commonUrl = '/user'
 
+/**
+ * login
+ * @param request 
+ * @returns 
+ */
 export function login(request:LoginRequest):Promise<ApiResults>{
     return ByPost(request,commonUrl+"/login");
 }
 
+/**
+ * register
+ * @param request 
+ * @returns 
+ */
 export function register(request:RegisterRequest):Promise<ApiResults>{
     return ByPost(request,commonUrl+"/register")
 }
