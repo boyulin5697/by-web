@@ -1,10 +1,7 @@
 import React, { useState,useCallback } from 'react'
 import { useNavigate } from 'react-router';
-import {  Button, Form, Input, message, Select } from 'antd'
-import { login,register } from '../../api/user';
-import { rejects } from 'assert';
-import { error } from 'console';
-import { ApiResults, CommonResponse } from '../../api/service';
+import {  Alert, Button, Form, Input, Select } from 'antd'
+import { register } from '../../api/user';
 
 /**
  * 注册页面
@@ -16,11 +13,19 @@ import { ApiResults, CommonResponse } from '../../api/service';
 
 const { Option } = Select;
 
+enum RegisteredConst {
+  UnRegistered = 0,
+  Registering,
+  Success,
+  Failed
+}
 
 export default function RegisterPage(props:any) {
   const { announceComponentChange } = props;
-  const [ registered,setRegistered ] = useState<boolean>(false);
-  announceComponentChange("Register");
+  const [ registered, setRegistered ] = useState<number>(RegisteredConst.UnRegistered);
+  const [ sentRequest, setSentRequest ] = useState<boolean>(false);
+  const [ sendResult, setSendResult ] = useState<boolean>();
+  const [ wrong, setWrong ] = useState<string>('');
   const onNavigate = useNavigate();
   const [form] = Form.useForm();
 
@@ -50,19 +55,32 @@ export default function RegisterPage(props:any) {
   };
 
   const onFinish = useCallback(async (values:any) => {
-    if(registered)return;
-    setRegistered(true)  
+    if(sentRequest&&(registered === RegisteredConst.Success))return
     const response = (await register(values)).resp
     if(response.code===200){
-      message.success('注册成功！')
-      onNavigate("/")
+      setRegistered(RegisteredConst.Success)
+      setSendResult(true)
+      setSentRequest(true)
+      setTimeout(() => onNavigate("/"),3000)
     }else{
-      setRegistered(false)
-      message.error('注册失败！')
+      setRegistered(RegisteredConst.Failed)
+      setSendResult(false)
+      setSentRequest(true)
+      setWrong(response.message)
     }
-  },[registered,onNavigate])
+    setSentRequest(false)
+  },[registered,onNavigate,sentRequest])
 
+  announceComponentChange("Register")
   return (
+    //TODO:在sendRequest被设置成true之后无法显示的bug需要解决
+    <div className='RegisterForm'>{
+      (sendResult)?(<Alert message='注册成功！'
+        closable 
+        type="success"
+        showIcon></Alert>):<Alert message={wrong} closable type='error'
+        showIcon /> 
+    }
     <Form
       {...formItemLayout}
       form={form}
@@ -159,5 +177,7 @@ export default function RegisterPage(props:any) {
         </Button>
       </Form.Item>
     </Form>
+    </div>
   )
+  
 }

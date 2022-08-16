@@ -20,12 +20,6 @@ export interface ApiResults<T = any>{
     resp: CommonResponse<T>;
 }
 
-export class ResponseError extends Error{
-    public url?:string;
-    public response?:any;
-    public body?: any;
-
-}
 /**
  * Rewrite post method
  * @param data 
@@ -38,6 +32,34 @@ export const ByPost = (data:any,url:string) => {
             api+url,
             {
                 data:data,
+                errorHandler: (error) => {
+                    console.error(error)
+                    return error
+                },
+            }
+        ).then((resp: CommonResponse) => {
+            resolve({
+                resp,
+            })
+        }).catch((error:Error) => {
+            resolve({resp:{code:500,message:error.message,time:''}});
+        });
+    })
+    return promise;
+}
+
+/**
+ * Rewrite Get operations
+ * @param params 
+ * @param url 
+ * @returns 
+ */
+export const ByGet = (params:any,url:string) => {
+    const promise: Promise<ApiResults> = new Promise((resolve) => {
+        request.post(
+            api+url,
+            {
+                params:params,
                 errorHandler: (error) => {
                     console.error(error)
                     return error

@@ -30,6 +30,8 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         request.verify();
         User user = new User();
         ModelMapperUtils.map(request,user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         userMapper.insert(user);
         return new CommonResponse<>().success(null);
     }

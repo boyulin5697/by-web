@@ -1,4 +1,4 @@
-import { ApiResults, ByPost, CommonResponse } from "./service";
+import { ApiResults, ByPost } from "./service";
 
 /**
  * 用户服务端请求
@@ -25,11 +25,13 @@ export interface RegisterRequest{
      intro:string
 }
 
+const commonUrl = '/user'
+
 export function login(request:LoginRequest):Promise<ApiResults>{
-    return ByPost(request,"/user/login");
+    return ByPost(request,commonUrl+"/login");
 }
 
 export function register(request:RegisterRequest):Promise<ApiResults>{
-    return ByPost(request,"/user/register")
+    return ByPost(request,commonUrl+"/register")
 }
 
