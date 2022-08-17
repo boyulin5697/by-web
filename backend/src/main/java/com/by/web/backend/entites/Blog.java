@@ -46,7 +46,7 @@ public class Blog {
      * 创建日期
      */
     @TableField(value = "created_date")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdDate;
 
     /**

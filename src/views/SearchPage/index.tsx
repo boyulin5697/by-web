@@ -1,4 +1,6 @@
 import React,{ useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { ModifyComponentAction } from '../../store/actions';
 import 'antd/dist/antd.css'
 import ByTable, { TableProperties } from '../../component/Table';
 import { TablePaginationConfig } from 'antd';
@@ -52,6 +54,10 @@ const mockData2 = [
 
 //搜索值应该在跳转时从props中同步导入
 export default function SearchPage(props:any) {
+    const dispatch = useDispatch()
+    const changeName = () => {
+        dispatch(ModifyComponentAction("Search Page"))
+    }
     //总页数配置,此值在请求api时应该自主计算
     const [ total, setTotal] = useState<number>(30);
     //本页搜索分页配置
@@ -108,8 +114,7 @@ export default function SearchPage(props:any) {
         ],
         pagination:pagination
     }
-    const { announceComponentChange } = props;
-    announceComponentChange("Search Results");
+    changeName()
     return (
         <div className='searchResult'>
             <ByTable tableContent={tableContent} modifyPage = {modifyPage}/>

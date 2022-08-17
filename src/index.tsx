@@ -4,14 +4,29 @@ import 'antd/dist/antd.less'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+store.subscribe(() => {
+  root.render(
+    <Provider store= {store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+  )
+})
+console.log(store)
 root.render(
-  <Router>
-    <App />
-  </Router>
+  <Provider store= {store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

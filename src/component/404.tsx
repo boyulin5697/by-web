@@ -1,6 +1,7 @@
 import { Alert, Button, Result } from 'antd';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ModifyComponentAction } from '../store/actions';
 
 /**
  * 404 组件
@@ -10,11 +11,10 @@ import { Link, useNavigate } from 'react-router-dom';
  * 
  */
 export default function NotFoundPage(props:any) {
+  const {dispatch} = props
   const navigate = useNavigate()
-  const { announceComponentChange } = props;
-  
-  announceComponentChange("Not Found");
-
+  dispatch(ModifyComponentAction('Not Found'))
+ 
   //顶部提示可见性
   const[visiable,setVisiable] = useState<boolean>(true)
 

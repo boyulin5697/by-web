@@ -3,8 +3,6 @@ import { Form, Input,Checkbox,Button, Alert} from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage(props:any) {
-  const { announceComponentChange } = props;
-  announceComponentChange("Login");
   const onFinish = (value:any) => {
       //TODO: Submit & get feed back
       <Alert type='success' message="Succeed!"/>

@@ -22,9 +22,6 @@ const photos = [
 ]
 
 export default function Home(props:any) {
-  const { announceComponentChange } = props;
-  announceComponentChange("Home");
-
   return (
     <div className='general'>
       <div className = "Carousel" style={{ maxHeight:'50%'}}>

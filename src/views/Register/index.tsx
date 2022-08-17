@@ -21,7 +21,6 @@ enum RegisteredConst {
 }
 
 export default function RegisterPage(props:any) {
-  const { announceComponentChange } = props;
   const [ registered, setRegistered ] = useState<number>(RegisteredConst.UnRegistered);
   const [ sentRequest, setSentRequest ] = useState<boolean>(false);
   const [ sendResult, setSendResult ] = useState<boolean>();
@@ -70,8 +69,6 @@ export default function RegisterPage(props:any) {
     }
     setSentRequest(false)
   },[registered,onNavigate,sentRequest])
-
-  announceComponentChange("Register")
   return (
     //TODO:在sendRequest被设置成true之后无法显示的bug需要解决
     <div className='RegisterForm'>{

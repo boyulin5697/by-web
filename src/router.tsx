@@ -7,6 +7,7 @@ import SearchPage from './views/SearchPage';
 import BlogCalenderPage from './views/BlogCalenderPage';
 import LoginPage from './views/Login';
 import RegisterPage from './views/Register';
+import { ModifyComponentAction } from './store/actions'
 
 /**
  * 路由组件
@@ -18,25 +19,28 @@ import RegisterPage from './views/Register';
 
 export default function ByRouter(props:any) {
 
-  const { getComponentChange } = props;
+  //const { dispatch  } = props;
+
+  //console.log(props)
  
-  function announceComponentChange(name:string){
-    getComponentChange(name)
-  }
+  // function announceComponentChange(name:string){
+  //   //getComponentChange(name)
+  //  //console.log(name)
+  //   dispatch(name)
+  // }
 
   return (
     <div className='byRouter'>
         <Routes>
-          <Route path = "/" element = { <Home announceComponentChange = { announceComponentChange }/> } >
+          <Route path = "/" element = { <Home/> } >
           </Route>
-          <Route path ="/blogCalender" element={ <BlogCalenderPage announceComponentChange={ announceComponentChange }/> }/>
-          <Route path='/login' element={<LoginPage announceComponentChange = { announceComponentChange }/> }/>
-          <Route path = "/searchResult" element ={ <SearchPage announceComponentChange = { announceComponentChange }/>}/>
-          <Route path = '/register' element={<RegisterPage announceComponentChange = { announceComponentChange }/>} />
-          <Route path = "*" element = { <NotFound announceComponentChange = { announceComponentChange }/> }>
+          <Route path ="/blogCalender" element={ <BlogCalenderPage/> }/>
+          <Route path='/login' element={<LoginPage/> }/>
+          <Route path = "/searchResult" element ={ <SearchPage/>}/>
+          <Route path = '/register' element={<RegisterPage/>} />
+          <Route path = "*" element = { <NotFound/> }>
           </Route>
         </Routes>
     </div>
   )
 }
-    

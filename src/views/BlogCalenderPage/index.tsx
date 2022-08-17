@@ -30,8 +30,6 @@ const listContents:listProperties = {
 
 
 export default function BlogCalenderPage(props:any) {
-  const { announceComponentChange } = props;
-  announceComponentChange("Blog Calender");
   const [ now ] = useState<string>(moment().format('YYYY-MM-DD'))
   const [ time, setTime ] = useState<string>();
   function setCurrentDestTime(newTime:string,kickToday:boolean){
