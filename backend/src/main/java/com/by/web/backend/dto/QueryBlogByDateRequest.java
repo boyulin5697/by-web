@@ -15,7 +15,6 @@ import java.util.Date;
 @Data
 public class QueryBlogByDateRequest implements ApiReq{
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Override

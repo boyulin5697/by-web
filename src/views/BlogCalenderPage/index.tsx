@@ -1,7 +1,9 @@
 import React,{ useState } from 'react'
 import ByCalender from '../../component/Calender'
-import ByList, { listProperties } from '../../component/List';
+import ByList, { listProperties, blogPreview } from '../../component/List';
 import moment from 'moment'
+import type { Moment } from 'moment'
+import { queryBlogByDate } from '../../api/blog';
 /**
  * 博客日历呈现页
  * 
@@ -9,35 +11,39 @@ import moment from 'moment'
  * @sicne 2022/8/12
  */
 
-const mockData = Array.from({length:200}).map((_,i) => (
-  {
-    href: 'https://ant.design',
-    title: `ant design part 1`,
-    avatar: 'https://joeschmoe.io/api/v1/random',
-    description:
-      'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-    content:
-      'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.'
-  }));
-
-
-const listContents:listProperties = {
-  data:mockData,
-  pagination:{
-  position:'bottom'
-  }
-}
-
-
 export default function BlogCalenderPage(props:any) {
-  const [ now ] = useState<string>(moment().format('YYYY-MM-DD'))
-  const [ time, setTime ] = useState<string>();
-  function setCurrentDestTime(newTime:string,kickToday:boolean){
-    if(newTime!==now||kickToday===true){
+  const [ now ] = useState<string>(moment().format('yyyy-MM-dd'))
+  const [ time, setTime ] = useState<Moment>();
+  const [ data, setData ] = useState<blogPreview[]>();
+  function setCurrentDestTime(newTime:Moment,kickToday:boolean){
+    if(moment(newTime).format('yyyy-MM-dd')!==now||kickToday===true){
       setTime(newTime);
+      getBlogByDate(newTime)
+      console.log(newTime)
     }
-    console.log("set state time:"+time)
+    console.log("set state time:"+time?.toString)
   }
+
+  async function getBlogByDate(time:Moment){
+      console.log(time)
+      const resp = (await queryBlogByDate({date:time})).resp
+      console.log(resp)
+      if(resp.code===200){
+          setData(resp.data)
+      }else{
+        //do nothing
+        console.log(resp)
+      }
+  }
+
+  const listContents = {
+    data:data,
+    pagination:{
+    position:'bottom'
+    }
+  }
+  
+
   return (
     <div className='BlogCalenderPage'>
       <div className='Calender' style={{backgroundColor:'lightblue'}}>

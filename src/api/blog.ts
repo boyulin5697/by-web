@@ -1,4 +1,7 @@
-import { ByPost,ByGet } from "./service";
+import { ByPost,ByGet, ApiResults } from "./service";
+import type { Moment } from 'moment';
+
+
 
 
 /**
@@ -11,4 +14,22 @@ import { ByPost,ByGet } from "./service";
 
 const api = '/blog';
 
+export interface QueryBlogByDateRequest{
+    date:Moment
+}
+
+export interface SearchBlogRequest{
+    searchString:string,
+    pageNum?:number,
+    pageSize?:number
+}
+
+
+export function queryBlogByDate(request:QueryBlogByDateRequest):Promise<ApiResults>{
+    return ByPost(request,api+"/queryBlogByDate")
+}
+
+export function searchForBlog(request:SearchBlogRequest):Promise<ApiResults>{
+    return ByPost(request,api+'/searchForBlog')
+}
 

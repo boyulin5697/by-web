@@ -10,6 +10,7 @@ import com.by.web.backend.entites.Blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,8 +28,9 @@ public class BlogService extends ServiceImpl<BlogMapper, Blog> {
     private BlogDetailDao blogDetailDao;
 
     public List<Blog> queryBlogListByDate(QueryBlogByDateRequest request){
+        log.warn(request.getDate().toString());
         QueryWrapper<Blog>wrapper = new QueryWrapper<>();
-        wrapper.eq("createdDate",request.getDate());
+        wrapper.between("created_date",new Date(request.getDate().getTime()-28800000),new Date(request.getDate().getTime()+86400000));
         return blogMapper.selectList(wrapper);
     }
 
