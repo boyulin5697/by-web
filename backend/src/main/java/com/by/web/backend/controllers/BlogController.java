@@ -9,6 +9,9 @@ import com.by.web.backend.utils.PageModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 /**
  * ,,,
  *
@@ -40,8 +43,8 @@ public class BlogController {
      * @return
      */
     @PostMapping("/searchForBlog")
-    public CommonResponse<PageModel<Blog>> searchForBlog(@RequestBody SearchBlogRequest request){
-        return null;
+    public CommonResponse searchForBlog(@RequestBody SearchBlogRequest request){
+        return new CommonResponse<>().success(blogService.searchBlog(request));
     }
 
 }

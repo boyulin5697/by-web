@@ -1,5 +1,6 @@
 package com.by.web.backend.entites;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -27,7 +28,7 @@ public class Blog {
     /**
      * 标题
      */
-    @TableField(value = "title")
+    @TableField(value = "title", condition = SqlCondition.LIKE)
     private String title;
 
     /**

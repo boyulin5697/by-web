@@ -17,7 +17,7 @@ export default function ByHeader() {
   const navigate = useNavigate();
   const onSearch = (value:string) => {
     console.log(value)
-    navigate("/searchResult")
+    navigate("/searchResult",{state:value})
   };
   return (
     <Header style={{ position: 'fixed', zIndex: 9999, width: '100%'}}>

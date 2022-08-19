@@ -1,9 +1,9 @@
 import React,{ useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { ModifyComponentAction } from '../../store/actions';
+import { useLocation } from 'react-router';
 import 'antd/dist/antd.css'
 import ByTable, { TableProperties } from '../../component/Table';
 import { TablePaginationConfig } from 'antd';
+import { searchForBlog } from '../../api/blog';
 
 /**
  * 搜索结果页
@@ -19,73 +19,40 @@ export interface SearchResult{
     abstract:string,
     time:string
 }
-//mock data
-const mockData = [
-    {
-        title:"hey",
-        author:"by.",
-        abstract:"First blog",
-        time:"2022-8-11"
-    },
-    {
-        title:"hey1",
-        author:"by.",
-        abstract:"Second blog",
-        time:"2022-8-11"
-    }
-
-]
-
-const mockData2 = [
-    {
-        title:"hey2",
-        author:"by.",
-        abstract:"First blog",
-        time:"2022-8-11"
-    },
-    {
-        title:"hey3",
-        author:"by.",
-        abstract:"Second blog",
-        time:"2022-8-11"
-    }
-
-]
 
 //搜索值应该在跳转时从props中同步导入
 export default function SearchPage(props:any) {
-    const dispatch = useDispatch()
-    const changeName = () => {
-        dispatch(ModifyComponentAction("Search Page"))
-    }
+    const state:any = useLocation().state
+    console.log(state)
+    const [ data, setData ] = useState();
+    const [ searchString ] = useState<string>(state) 
+    //渲染查询结果
     //总页数配置,此值在请求api时应该自主计算
-    const [ total, setTotal] = useState<number>(30);
     //本页搜索分页配置
     const [pagination, setPageination] = useState<TablePaginationConfig>({
         current:1,
-        pageSize:10,
-        total:total
+        pageSize:10
     });
-    //渲染查询结果
-    const [data, setData] = useState<SearchResult[]>(mockData)
+    let total = 0
+    async function getBlogData(){
+        const resp = (await (searchForBlog({ searchString:searchString, pageNum:pagination.current,pageSize:pagination.pageSize}))).resp
+        if(resp.code === 200){
+            const content =resp.data
+            if(data===undefined){
+                setData(content.content)
+            }
+            total = content.totalPages
+        }
+    }
+    getBlogData()
 
     //修改页面配置或切换页面
     function modifyPage(current:number,pageSize:number){
         setPageination({
             current: current,
-            pageSize: pageSize,
-            total:total//这个是mock数据，应该在做查询请求时获取并配置
+            pageSize: pageSize
         })
-        switch(current){
-            case 1: setData(mockData)
-                break;
-            case 2: setData(mockData2)
-                break;
-            default: break;        
-        }
-        //在api定义之后，这里应该要放入下一页的api 
-        //setData(query(current,pageSize))
-        }
+    }
     //定义本页的表格组件
     const tableContent: TableProperties<SearchResult> = {
         data:data,
@@ -103,18 +70,21 @@ export default function SearchPage(props:any) {
             },
             {
                 title:'Abstract',
-                dataIndex:'abstract',
+                dataIndex:'description',
                 width:'40%'
             },
             {
                 title:'Create Time',
-                dataIndex:'time',
+                dataIndex:'createdDate',
                 width:'30%'
             }
         ],
-        pagination:pagination
+        pagination: {
+            pageSize:pagination.pageSize,
+            current:pagination.current,
+            total:total
+        }
     }
-    changeName()
     return (
         <div className='searchResult'>
             <ByTable tableContent={tableContent} modifyPage = {modifyPage}/>
