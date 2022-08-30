@@ -60,8 +60,8 @@ export default function ByList(props:any) {
      renderItem={(item:any) => (
        <List.Item 
         actions={[
-            <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-            <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+            <IconText icon={LikeOutlined} text={item.likes} key="list-vertical-like-o" />,
+            <IconText icon={MessageOutlined} text={item.comments} key="list-vertical-message" />,
           ]} 
           extra={
             <img

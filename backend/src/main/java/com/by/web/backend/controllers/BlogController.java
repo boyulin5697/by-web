@@ -1,6 +1,7 @@
 package com.by.web.backend.controllers;
 
 import com.by.web.backend.dto.CommonResponse;
+import com.by.web.backend.dto.PostBlogRequest;
 import com.by.web.backend.dto.QueryBlogByDateRequest;
 import com.by.web.backend.dto.SearchBlogRequest;
 import com.by.web.backend.entites.Blog;
@@ -46,5 +47,15 @@ public class BlogController {
     public CommonResponse searchForBlog(@RequestBody SearchBlogRequest request){
         return new CommonResponse<>().success(blogService.searchBlog(request));
     }
+
+    /**
+     * 发表新博文：暂时不考虑用户权限问题
+     */
+    @PostMapping("/postBlog")
+    public CommonResponse postBlog(@RequestBody PostBlogRequest request){
+        blogService.postBlog(request);
+        return new CommonResponse<>().success("ok！");
+    }
+
 
 }

@@ -7,7 +7,7 @@ import SearchPage from './views/SearchPage';
 import BlogCalenderPage from './views/BlogCalenderPage';
 import LoginPage from './views/Login';
 import RegisterPage from './views/Register';
-import { ModifyComponentAction } from './store/actions'
+import PostBlogPage from './views/PostBlogPage';
 
 /**
  * 路由组件
@@ -38,6 +38,7 @@ export default function ByRouter(props:any) {
           <Route path='/login' element={<LoginPage/> }/>
           <Route path = "/searchResult" element ={ <SearchPage/>}/>
           <Route path = '/register' element={<RegisterPage/>} />
+          <Route path = '/postBlog' element={<PostBlogPage/>} />
           <Route path = "*" element = { <NotFound/> }>
           </Route>
         </Routes>

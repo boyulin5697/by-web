@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.by.web.backend.utils.UuidTool;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -23,7 +24,7 @@ public class Blog {
      * 博客编号
      */
     @TableId(value = "blog_id")
-    private String blogId;
+    private String blogId = UuidTool.getUUID();
 
     /**
      * 标题
