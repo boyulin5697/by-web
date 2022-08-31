@@ -55,11 +55,12 @@ export const ByPost = (data:any,url:string) => {
  * @returns 
  */
 export const ByGet = (params:any,url:string) => {
+    
     const promise: Promise<ApiResults> = new Promise((resolve) => {
-        request.post(
+        request.get(
             api+url,
             {
-                params:params,
+                params:params===undefined?undefined:params,
                 errorHandler: (error) => {
                     console.error(error)
                     return error

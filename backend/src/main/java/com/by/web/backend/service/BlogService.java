@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.by.web.backend.dao.BlogDetailDao;
 import com.by.web.backend.dao.BlogMapper;
+import com.by.web.backend.dto.BlogRespDto;
 import com.by.web.backend.dto.PostBlogRequest;
 import com.by.web.backend.dto.QueryBlogByDateRequest;
 import com.by.web.backend.dto.SearchBlogRequest;
@@ -69,6 +70,24 @@ public class BlogService extends ServiceImpl<BlogMapper, Blog> {
 
         blogMapper.insert(blog);
         blogDetailDao.save(blogDetail);
+    }
+
+    public BlogRespDto getBlogById(String id){
+        Blog blog = blogMapper.selectById(id);
+        if(null == blog){
+            return null;
+        }else{
+            BlogRespDto dto = new BlogRespDto();
+            BlogDetail detail = blogDetailDao.findById(id);
+            dto.setBlogId(id);
+            dto.setAvatar(blog.getAvatar());
+            dto.setCreatedDate(blog.getCreatedDate());
+            dto.setTitle(blog.getTitle());
+            dto.setDescription(blog.getDescription());
+            dto.setBlogContent(detail.getBlogContent());
+            dto.setCommentList(detail.getCommentList());
+            return dto;
+        }
     }
 
 }

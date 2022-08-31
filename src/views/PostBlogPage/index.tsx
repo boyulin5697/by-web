@@ -3,9 +3,7 @@ import {
   Form,
   Input,
   Button,
-  Upload,
 } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import { postBlog } from '../../api/blog';
 import { useNavigate } from 'react-router';
 

@@ -8,6 +8,7 @@ import BlogCalenderPage from './views/BlogCalenderPage';
 import LoginPage from './views/Login';
 import RegisterPage from './views/Register';
 import PostBlogPage from './views/PostBlogPage';
+import BlogDetailPage from './views/BlogDetailPage';
 
 /**
  * 路由组件
@@ -39,8 +40,9 @@ export default function ByRouter(props:any) {
           <Route path = "/searchResult" element ={ <SearchPage/>}/>
           <Route path = '/register' element={<RegisterPage/>} />
           <Route path = '/postBlog' element={<PostBlogPage/>} />
-          <Route path = "*" element = { <NotFound/> }>
+          <Route path='/blogDetail' element={<BlogDetailPage/>}>
           </Route>
+          <Route path = "*" element = { <NotFound/> }/>
         </Routes>
     </div>
   )

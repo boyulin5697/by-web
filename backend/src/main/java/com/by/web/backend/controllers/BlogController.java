@@ -4,9 +4,7 @@ import com.by.web.backend.dto.CommonResponse;
 import com.by.web.backend.dto.PostBlogRequest;
 import com.by.web.backend.dto.QueryBlogByDateRequest;
 import com.by.web.backend.dto.SearchBlogRequest;
-import com.by.web.backend.entites.Blog;
 import com.by.web.backend.service.BlogService;
-import com.by.web.backend.utils.PageModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +53,11 @@ public class BlogController {
     public CommonResponse postBlog(@RequestBody PostBlogRequest request){
         blogService.postBlog(request);
         return new CommonResponse<>().success("ok！");
+    }
+
+    @GetMapping("/getBlogDetailById")
+    public CommonResponse getBlogDetailById(@RequestBody String id){
+        return new CommonResponse<>().success(blogService.getBlogById(id));
     }
 
 

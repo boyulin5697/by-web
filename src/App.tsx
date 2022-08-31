@@ -13,6 +13,7 @@ const { Content } = Layout;
 
 function App() {
   const { componentName } = useSelector((store:any) => store.app)
+  
   //const [ componentName, setComponentName ] = useState<string>("Home")
  
 

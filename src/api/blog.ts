@@ -44,3 +44,7 @@ export function postBlog(request:PostBlogRequest):Promise<ApiResults>{
     return ByPost(request,api+'/postBlog')
 }
 
+export function getBlogDetail(request:string):Promise<ApiResults>{
+    return ByPost({id:request},api+'/getBlogDetail')
+}
+

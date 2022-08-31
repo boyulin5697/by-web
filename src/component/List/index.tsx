@@ -23,6 +23,7 @@ import React from 'react'
  * 
  */
 export interface blogPreview{
+  blogId:string,
   avatar:string,
   title:string,
   href:string,
@@ -73,8 +74,9 @@ export default function ByList(props:any) {
         >
         <List.Item.Meta
           avatar={<Avatar src={item.avatar} />}
-          //先写死，以后调整
-          title={<Link to = "/">{item.title}</Link>}
+          //bug
+          //先调整，以后写死
+          title={<Link to = "/blogDetail" state={{id:item.blogId}}>{item.title}</Link>}
           description={item.description}
         />
         {item.content}  
