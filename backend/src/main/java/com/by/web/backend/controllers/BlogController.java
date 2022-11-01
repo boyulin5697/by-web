@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * ,,,
@@ -55,9 +56,14 @@ public class BlogController {
         return new CommonResponse<>().success("ok！");
     }
 
-    @GetMapping("/getBlogDetailById")
+    @PostMapping("/getBlogDetailById")
     public CommonResponse getBlogDetailById(@RequestBody String id){
         return new CommonResponse<>().success(blogService.getBlogById(id));
+    }
+
+    @PostMapping("/getStudyNavigatePage")
+    public CommonResponse getStudyNavigatePage(@RequestBody Map map){
+        return new CommonResponse<>().success(blogService.getStudyNavigatePage(map));
     }
 
 

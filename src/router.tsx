@@ -9,6 +9,7 @@ import LoginPage from './views/Login';
 import RegisterPage from './views/Register';
 import PostBlogPage from './views/PostBlogPage';
 import BlogDetailPage from './views/BlogDetailPage';
+import StudyNaviPage from "./views/StudyNaviPage";
 
 /**
  * 路由组件
@@ -40,8 +41,8 @@ export default function ByRouter(props:any) {
           <Route path = "/searchResult" element ={ <SearchPage/>}/>
           <Route path = '/register' element={<RegisterPage/>} />
           <Route path = '/postBlog' element={<PostBlogPage/>} />
-          <Route path='/blogDetail' element={<BlogDetailPage/>}>
-          </Route>
+          <Route path='/blogDetail' element={<BlogDetailPage/>}/>
+          <Route path='/studynavipage' element={<StudyNaviPage/>}/>
           <Route path = "*" element = { <NotFound/> }/>
         </Routes>
     </div>

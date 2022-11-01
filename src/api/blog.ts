@@ -1,4 +1,4 @@
-import { ByPost,ByGet, ApiResults } from "./service";
+import { ByPost, ApiResults } from "./service";
 import type { Moment } from 'moment';
 
 
@@ -44,7 +44,10 @@ export function postBlog(request:PostBlogRequest):Promise<ApiResults>{
     return ByPost(request,api+'/postBlog')
 }
 
-export function getBlogDetail(request:string):Promise<ApiResults>{
-    return ByPost({id:request},api+'/getBlogDetail')
+export function getBlogDetail(request:any):Promise<ApiResults>{
+    return ByPost({id:request},api+'/getBlogDetailById')
 }
 
+export function getStudyNaviPage(request:number):Promise<ApiResults>{
+    return ByPost({part:request}, api+'/getStudyNavigatePage')
+}

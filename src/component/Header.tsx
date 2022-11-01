@@ -37,11 +37,11 @@ export default function ByHeader() {
           <Menu.Item key="Album">
             相册
           </Menu.Item>
-          <Menu.Item key= "Login">
-            <Link to='/login'>登录</Link>
+          <Menu.Item key = "study-navi">
+              <Link to="/studynavipage">学习导航</Link>
           </Menu.Item>
-          <Menu.Item key= '注册'>
-            <Link to ='register'>注册</Link>
+          <Menu.Item key = "Music">
+              音乐
           </Menu.Item>
           <Menu.Item>
           <div className="searchBox" style={{marginLeft:'30px'}}>

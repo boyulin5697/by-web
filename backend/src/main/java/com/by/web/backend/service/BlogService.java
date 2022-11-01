@@ -6,13 +6,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.by.web.backend.dao.BlogDetailDao;
 import com.by.web.backend.dao.BlogMapper;
-import com.by.web.backend.dto.BlogRespDto;
-import com.by.web.backend.dto.PostBlogRequest;
-import com.by.web.backend.dto.QueryBlogByDateRequest;
-import com.by.web.backend.dto.SearchBlogRequest;
+import com.by.web.backend.dao.StudyContentDao;
+import com.by.web.backend.dto.*;
 import com.by.web.backend.entites.Blog;
 import com.by.web.backend.entites.BlogDetail;
+import com.by.web.backend.entites.StudyContent;
 import com.by.web.backend.utils.PageModel;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * ,,,
@@ -31,6 +34,9 @@ import java.util.List;
 public class BlogService extends ServiceImpl<BlogMapper, Blog> {
     @Autowired
     private BlogMapper blogMapper;
+
+    @Autowired
+    private StudyContentDao studyContentDao;
 
     @Autowired
     private BlogDetailDao blogDetailDao;
@@ -86,8 +92,27 @@ public class BlogService extends ServiceImpl<BlogMapper, Blog> {
             dto.setDescription(blog.getDescription());
             dto.setBlogContent(detail.getBlogContent());
             dto.setCommentList(detail.getCommentList());
+            log.warn(dto.toString());
             return dto;
         }
     }
+
+    public List<StudyContentDto> getStudyNavigatePage(Map map){
+        int part = (Integer)map.get("part");
+        List<StudyContent> list = studyContentDao.selectList(new QueryWrapper<StudyContent>().lambda().eq(StudyContent::getType, part));
+        log.warn(list.toString());
+
+        List<StudyContentDto> resultList = list.stream().map(content -> {
+            StudyContentDto dto = new StudyContentDto();
+            dto.setSrc(content.getSrc());
+            dto.setDescription(content.getDescription());
+            dto.setTitle(content.getTitle());
+            dto.setTo(content.getRef());
+            return dto;
+        }).collect(Collectors.toList());
+
+        return resultList;
+    }
+
 
 }
