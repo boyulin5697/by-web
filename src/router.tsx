@@ -10,6 +10,7 @@ import RegisterPage from './views/Register';
 import PostBlogPage from './views/PostBlogPage';
 import BlogDetailPage from './views/BlogDetailPage';
 import StudyNaviPage from "./views/StudyNaviPage";
+import MusicByPage from "./views/MusicByPage";
 
 /**
  * 路由组件
@@ -43,6 +44,7 @@ export default function ByRouter(props:any) {
           <Route path = '/postBlog' element={<PostBlogPage/>} />
           <Route path='/blogDetail' element={<BlogDetailPage/>}/>
           <Route path='/studynavipage' element={<StudyNaviPage/>}/>
+          <Route path='/musicpage' element={<MusicByPage/>}/>
           <Route path = "*" element = { <NotFound/> }/>
         </Routes>
     </div>

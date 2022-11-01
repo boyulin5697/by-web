@@ -100,8 +100,6 @@ public class BlogService extends ServiceImpl<BlogMapper, Blog> {
     public List<StudyContentDto> getStudyNavigatePage(Map map){
         int part = (Integer)map.get("part");
         List<StudyContent> list = studyContentDao.selectList(new QueryWrapper<StudyContent>().lambda().eq(StudyContent::getType, part));
-        log.warn(list.toString());
-
         List<StudyContentDto> resultList = list.stream().map(content -> {
             StudyContentDto dto = new StudyContentDto();
             dto.setSrc(content.getSrc());

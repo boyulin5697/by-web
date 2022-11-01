@@ -60,7 +60,6 @@ const StudyNaviPage = () => {
                 <div className= "content-wrapper">
                     {
                         part1.map((value, index) => {
-                            console.log(index)
                             return <ByCard
                                 title = {value.title}
                                 description = {value.description}
@@ -76,7 +75,6 @@ const StudyNaviPage = () => {
                 <div className= "content-wrapper">
                     {
                         part2.map((value,index) => {
-                            console.log(index)
                             return <ByCard
                                 title = {value.title}
                                 src = {value.src}

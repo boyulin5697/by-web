@@ -41,7 +41,7 @@ export default function ByHeader() {
               <Link to="/studynavipage">学习导航</Link>
           </Menu.Item>
           <Menu.Item key = "Music">
-              音乐
+              <Link to="/musicpage">音乐</Link>
           </Menu.Item>
           <Menu.Item>
           <div className="searchBox" style={{marginLeft:'30px'}}>

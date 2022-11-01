@@ -1,0 +1,107 @@
+.App{
+    width:100%;
+    height: 100%;
+    position:absolute;
+    background-color: #efefef;
+    backdrop-filter: blur(40px) opacity(20%);
+
+    ::before {
+        content:"";
+        position: absolute;
+        z-index: -1;
+        background-color: rgba(246, 246, 248, 0.25);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+    }
+
+    .general-canvas {
+        width:100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        grid-template-rows: repeat(9, 1fr);
+        grid-column-gap: 5px;
+        grid-row-gap: 5px;
+        border: 1rem solid;
+        background-image: url("../../../public/OIP-C.jpeg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+
+        .wave-monitor {
+            grid-area: 2 / 4 / 6 / 8;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            border-radius: 10px;
+        }
+        .pitch-zone {
+            grid-area: 2 / 9 / 3 / 10;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .speed-zone {
+            grid-area: 2 / 2 / 3 / 3;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .music-info {
+            grid-area: 3 / 2 / 6 / 4;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .upload-zone {
+            grid-area: 6 / 5 / 8 / 7;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .volume-zone {
+            grid-area: 6 / 2 / 7 / 5;
+            box-shadow: 3px 3px 3px 3px #888888;
+            font-family: ".AppleSystemUIFont", system-ui;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .play-list {
+            grid-area: 6 / 8 / 9 / 10;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .play-zone {
+            grid-area: 6 / 7 / 7 / 8;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .note-zone {
+            grid-area: 4 / 9 / 5 / 10;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+        .note-zone {
+            grid-area: 4 / 9 / 5 / 10;
+            box-shadow: 3px 3px 3px 3px #888888;
+            padding:5px;
+            background: rgba(255, 234, 234, 0.56);
+            border-radius: 10px;
+        }
+    }
+
+
+}
