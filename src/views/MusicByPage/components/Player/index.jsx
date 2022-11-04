@@ -1,75 +1,44 @@
-import React, {useState, useRef, useEffect} from 'react';
-
-
+import React, {useState, useRef, useEffect, useCallback} from 'react';
+import ProgressBar from "../PrograssBar";
+import './index.css'
+import {current} from "@reduxjs/toolkit";
 
 /**
  * Player
  * @author by.
  */
-const Player = (props) => {
+export default function Player(props) {
 
-    const {currentMusic, volume, informJump}= props;
+    const {currentMusic, volume, informJump} = props;
 
     const audio = useRef();
-    const [readyPlay, setReadyPlay] = useState(false);
-    const [isPlaying, setIsPlaying] = useState(false);
-
-    //control volume
-    useEffect(() => {
-        audio.current.volume = volume/100;
-    }, [volume])
+    const currentTime = useRef({value:0})
 
     //convert the uploaded music into src
     const getCurrentMusic = () => {
-        let src = URL.createObjectURL(currentMusic)
+        let src = currentMusic.url
         console.log("getting music at" + src)
         return src;
-    }
-
-    //when music ready
-    const ready = () => {
-        setReadyPlay(true)
-    }
-
-    //play the music
-    const play = async() => {
-        if(readyPlay){
-            try{
-                await audio.current.play()
-                setIsPlaying(true)
-
-            }catch (error){
-                console.log(error)
-                setIsPlaying(false)
-            }
-        }
-    }
-
-    //pause the music
-    const pause = () => {
-        audio.current.pause();
-        setIsPlaying(false);
     }
 
     //when music terminate
     const end = () => {
         informJump();
-        setIsPlaying(false);
     }
 
-
     const updateTime = () => {
-
+        currentTime.current.value = audio.current.currentTime
     }
 
     return (
-        <div className="Player">
-            <audio src = {getCurrentMusic()} ref = {audio} onCanPlay={ready} onEnded={end} onTimeUpdate={updateTime}></audio>
+        <div className="player">
+            <audio
+                className = "audio-player"
+                src={getCurrentMusic()} ref={audio} onEnded={end}
+                   onTimeUpdate={updateTime}
+                   controls={true}
+            ></audio>
             <div className="wave-form"></div>
-            <div className="progress-bar"></div>
-            <div className={isPlaying?"button-play":"button-stop"}></div>
         </div>
-    );
-};
-
-export default Player;
+    )
+}
